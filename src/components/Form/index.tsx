@@ -1,9 +1,10 @@
-import { Button, Text, View } from "react-native"
+import { Text, View } from "react-native"
 import Checkbox from "expo-checkbox";
-import CustomButton from "../CustomButton";
+import CustomLink from "../CustomLink";
 import styles from "./styles";
 import Input from "./Input";
 import { useState } from "react";
+import CustomButton from "../CustomButton";
 
 const Form = () => {
   const [isChecked, setChecked] = useState(false);
@@ -23,25 +24,28 @@ const Form = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
-      <View style={{ flexDirection: 'row' }}>
+      <View style={styles.section}>
         <Text style={styles.text}>Don`t have an account?</Text>
-        <CustomButton label="Sign Up" onPress={signUp}/>
+        <CustomLink label="Sign Up" onPress={signUp}/>
       </View>
       
       <Input label="Email" placeholder="Email" keyboardType="email-address" />
       <Input label="Password" placeholder="Password" secureTextEntry/>
 
-      <View style={{ flexDirection: 'row' }}>
-        <Checkbox 
-          style={styles.checkbox}
-          value={isChecked}
-          onValueChange={setChecked}
-        />
-        <CustomButton label="Forget Password ?" onPress={forgotPassword} />
+      <View style={styles.containerCheckboxCustomLink}>
+        <View style={styles.containerCheckbox}>
+          <Checkbox 
+            style={styles.checkbox}
+            value={isChecked}
+            onValueChange={setChecked}
+          />
+          <Text style={styles.text}>Remember me</Text>
+        </View>
+        <CustomLink label="Forget Password ?" onPress={forgotPassword} />
       </View>
-      <Button title="Log In" onPress={signIn} />
-      <Text>Or</Text>
-      <CustomButton label="Continue with Google" onPress={signIn} />
+      <CustomButton label="Log In" onPress={signIn} styleButton={styles.customButton} styleText={styles.customButtonText} />
+      <Text style={styles.orText}>Or</Text>
+      <CustomButton label="Continue with Google" onPress={signIn} styleButton={styles.customButton} styleText={styles.customButtonText} />
     </View>
   );
 };
