@@ -6,20 +6,15 @@ import Input from "./Input";
 import { useState } from "react";
 import CustomButton from "../CustomButton";
 
-const Form = () => {
+type FormProps = {
+  promptAsync: () => void,
+  signUp: () => void,
+  forgotPassword: () => void,
+  signIn: () => void,
+}
+
+const Form = ({ promptAsync, signUp, forgotPassword, signIn } : FormProps) => {
   const [isChecked, setChecked] = useState(false);
-
-  const signUp = () => {
-    console.log('TESTE CLICK SIGNUP OK!');
-  }
-
-  const forgotPassword = () => {
-    console.log('TESTE CLICK FORGOT PASSWORD OK!');
-  }
-
-  const signIn = () => {
-    console.log('TESTE CLICK LOGIN OK!');
-  }
 
   return (
     <View style={styles.container}>
@@ -45,7 +40,7 @@ const Form = () => {
       </View>
       <CustomButton label="Log In" onPress={signIn} styleButton={styles.customButton} styleText={styles.customButtonText} />
       <Text style={styles.orText}>Or</Text>
-      <CustomButton label="Continue with Google" onPress={signIn} styleButton={styles.customButton} styleText={styles.customButtonText} />
+      <CustomButton label="Continue with Google" onPress={() => promptAsync()} styleButton={styles.customButton} styleText={styles.customButtonText} />
     </View>
   );
 };
